@@ -22,9 +22,7 @@ namespace Food_Donation.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            
             string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
-
             int rowAffacted;
             SqlConnection conn = new SqlConnection(constr);
             string query = "INSERT INTO Users(UserName, Email, Password, RoleId) VALUES('" + user.UserName + "','" + user.Email + "', '"+user.Password+"', 1)";

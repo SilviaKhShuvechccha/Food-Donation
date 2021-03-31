@@ -11,7 +11,7 @@ namespace Food_Donation.Models
         public string UserName { set; get; }
         public string Email { set; get; }
         public string Password { set; get; }
-        public string RoleId { set; get; }
+        public int RoleId { set; get; }
 
 
     }

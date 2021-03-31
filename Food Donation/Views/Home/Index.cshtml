@@ -1,5 +1,21 @@
-﻿@{
+﻿@model IEnumerable<Food_Donation.Models.Donate>
+@{
     ViewData["Title"] = "Home Page";
 }
-
-
+<div class="card-deck">
+    @foreach (var employee in Model)
+    {
+        <div class="card m-3">
+            <div class="card-header">
+                <h3>@employee.DonationTitle</h3>
+            </div>
+            <img class="card-img-top image_thumbnil" src="~@employee.FileUrl" asp-append-version="true" />
+            <div class="card-footer text-center">
+                <a asp-controller="home" asp-action="details" asp-route-id="@employee.DonationId"
+                   class="btn btn-primary m-1">View</a>
+                <a class="btn btn-primary m-1" asp-controller="home" asp-action="edit" asp-route-id="@employee.DonationId">Receive</a>
+                <a class="btn btn-danger m-1" asp-controller="home" asp-action="delete" asp-route-id="@employee.DonationId">Decline</a>
+            </div>
+        </div>
+    }
+</div>
