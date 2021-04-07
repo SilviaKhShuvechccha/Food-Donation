@@ -25,10 +25,14 @@
                             </li>
 
                         }
+                        @if (Context.Session.GetString("username") == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Create">Signup</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Create">Signup</a>
-                        </li>
+                        }
+
                         <li class="nav-item">
                             @if (Context.Session.GetString("username") != null)
                             {

@@ -1,5 +1,5 @@
 *.swp
-*.*~
+i*.*~
 project.lock.json
 .DS_Store
 *.pyc
@@ -37,3 +37,5 @@ msbuild.wrn
 .vs/
 *.jpg
 *.jpeg
+*.rar
+*.sql
