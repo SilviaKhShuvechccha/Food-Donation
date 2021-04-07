@@ -18,9 +18,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Donation" asp-action="Create">Donate</a>
-                        </li>
+                        @if (Context.Session.GetString("role") != 2 + "")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Donation" asp-action="Create">Donate</a>
+                            </li>
+
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Create">Signup</a>
                         </li>
@@ -34,8 +39,8 @@
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Profile</a>
-                                        <a class="dropdown-item" href="#">Settings</a>
+                                        @*<a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Settings</a>*@
                                         <a class="dropdown-item" href="/LoginSystem/Logout">Logout</a>
 
                                     </div>

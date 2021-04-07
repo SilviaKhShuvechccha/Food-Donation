@@ -15,7 +15,6 @@ namespace Food_Donation.Controllers
     public class DonationController : Controller
     {
         IWebHostEnvironment Environment;
-
         public DonationController(IWebHostEnvironment _environment)
         {
             Environment = _environment;
@@ -24,7 +23,6 @@ namespace Food_Donation.Controllers
         {
             return View();
         }
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,7 +36,7 @@ namespace Food_Donation.Controllers
             string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
             int rowAffacted;
             SqlConnection conn = new SqlConnection(constr);
-            string query = "INSERT INTO Donate(DonationTitle, FoodDescription, FoodWeight, FileUrl, Location, ContactNo, DonatedBy) VALUES('" + donate.DonationTitle + "','" + donate.FoodDescription + "', '" + donate.FoodWeight + "', '" + donate.FileUrl + "', '" + donate.Location + "', '" + donate.ContactNo + "', 1)";
+            string query = "INSERT INTO Donate(DonationTitle, FoodDescription, FoodWeight, FileUrl, Location, ContactNo, DonatedBy, DonationStatus) VALUES('" + donate.DonationTitle + "','" + donate.FoodDescription + "', '" + donate.FoodWeight + "', '" + donate.FileUrl + "', '" + donate.Location + "', '" + donate.ContactNo + "', 1, '" + donate.DonationStatus + "')";
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
             rowAffacted = cmd.ExecuteNonQuery();
@@ -47,7 +45,7 @@ namespace Food_Donation.Controllers
             if (rowAffacted > 0)
             {
                 TempData["message"] = "Donation Submitted Successfully";
-               return RedirectToAction("index", "Home");
+                return RedirectToAction("index", "Home");
             }
             else
             {
@@ -56,13 +54,84 @@ namespace Food_Donation.Controllers
             }
 
         }
-
-        public byte[] ImageToByteArray(IFormFile imageFile)
+        [HttpGet]
+        public IActionResult Receive(int id)
         {
-            using var ms = new MemoryStream();
-            imageFile.CopyTo(ms);
-            byte[] fileBytes = ms.ToArray();
-            return fileBytes;
+            ViewBag.donationId = id;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Receive(Delivery delivery)
+        {
+            string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
+            int rowAffacted;
+            SqlConnection conn = new SqlConnection(constr);
+            string query = "INSERT INTO Delivery(DeliveryManName, DeliveryManPhone, DonationId) VALUES('" + delivery.DeliveryManName + "','" + delivery.DeliveryManPhone + "', '" + delivery.DonationId + "')";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            rowAffacted = cmd.ExecuteNonQuery();
+            conn.Close();
+
+            if (rowAffacted > 0)
+            {
+                ChangeStatus(delivery.DonationId);
+                TempData["message"] = "Donation Accepted Successfully";
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                TempData["message"] = "Can't Accept this donation";
+                return View();
+            }
+        }
+        public IActionResult Delete(int id)
+        {
+            string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
+            int rowAffacted;
+            SqlConnection conn = new SqlConnection(constr);
+            string query = "DELETE FROM Donate WHERE DonationId = " + id + "";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            rowAffacted = cmd.ExecuteNonQuery();
+            conn.Close();
+
+            if (rowAffacted > 0)
+            {
+                TempData["message"] = "Donation Deleted Successfully";
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                TempData["message"] = "Can't Delete this donation";
+                return View();
+            }
+        }
+        public IActionResult View(int id)
+        {
+            string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
+            SqlConnection conn = new SqlConnection(constr);
+            string query = "SELECT * FROM Donate WHERE DonationId = " + id + "";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            Donate donate = new Donate
+            {
+                DonationId = int.Parse(reader["DonationId"].ToString()),
+                DonationTitle = reader["DonationTitle"].ToString(),
+                FoodDescription = reader["FoodDescription"].ToString(),
+                FoodWeight = double.Parse(reader["FoodWeight"].ToString()),
+                FileUrl = reader["FileUrl"].ToString(),
+                Location = reader["Location"].ToString(),
+                ContactNo = reader["ContactNo"].ToString(),
+                DonatedBy = int.Parse(reader["DonatedBy"].ToString()),
+                DonationStatus = reader["DonationStatus"].ToString()
+            };
+            reader.Close();
+            conn.Close();
+            ViewBag.deliveryMan = GetDeliveryManInformation(id);
+
+            return View(donate);
         }
         private string SaveFile(IFormFile image)
         {
@@ -82,6 +151,42 @@ namespace Food_Donation.Controllers
                       + "_"
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
+        }
+        private bool ChangeStatus(int donationId)
+        {
+            string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
+            int rowAffacted;
+            SqlConnection conn = new SqlConnection(constr);
+            string query = "UPDATE Donate SET DonationStatus = 'Received' WHERE DonationId = " + donationId + "";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            rowAffacted = cmd.ExecuteNonQuery();
+            conn.Close();
+            return rowAffacted > 0;
+
+        }
+        private Delivery GetDeliveryManInformation(int donationId)
+        {
+            string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
+            SqlConnection conn = new SqlConnection(constr);
+            string query = "SELECT * FROM Delivery WHERE DonationId = " + donationId + "";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            Delivery delivery = null;
+            if(reader.Read())
+            {
+                delivery = new Delivery
+                {
+                    DonationId = int.Parse(reader["DonationId"].ToString()),
+                    DeliveryManName = reader["DeliveryManName"].ToString(),
+                    DeliveryManPhone = reader["DeliveryManPhone"].ToString(),
+
+                };
+            }
+            reader.Close();
+            conn.Close();
+            return delivery;
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Food_Donation.Controllers
         {
             string constr = @"Server=LAPTOP-JHUBDUV5; Database=FoodDonation; Integrated Security= True";
             SqlConnection conn = new SqlConnection(constr);
-            string query = "SELECT * FROM Donate";
+            //string query = "SELECT * FROM Donate";
+            string query = "SELECT * FROM Donate INNER JOIN Users ON Users.UserId = Donate.DonatedBy";
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
@@ -33,7 +34,9 @@ namespace Food_Donation.Controllers
                     FileUrl = reader["FileUrl"].ToString(),
                     Location = reader["Location"].ToString(),
                     ContactNo = reader["ContactNo"].ToString(),
-                    DonatedBy = int.Parse(reader["DonatedBy"].ToString())
+                    DonatedBy = int.Parse(reader["DonatedBy"].ToString()),
+                    DonationStatus = reader["DonationStatus"].ToString(),
+                    DonorName = reader["UserName"].ToString(),
                 };
                 donationList.Add(donate);
             }

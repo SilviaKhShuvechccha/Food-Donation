@@ -16,5 +16,7 @@ namespace Food_Donation.Models
         public string ContactNo { set; get; }
         public string Location { set; get; }
         public int DonatedBy { set; get; }
+        public string DonationStatus { set; get; } = "Pending";
+        public string DonorName { set; get; }
     }
 }
