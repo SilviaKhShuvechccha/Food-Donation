@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>author form</title>
+    <style>
+        body{
+            background-image: url("pic10.jpg");
+            background-repeat: no-repeat;
+            background-size:700px;
+            background-color: #4D565C;
+                 }
+         .C{
+            height: 500px;
+            width:500px;
+            padding:40px;
+            position:absolute;
+            top:25%;
+            left:62%;
+            background:#D5A986;
+            text-align: end;
+            font-family: Verdana;
+            border-radius:20px;
+        }
+        .C input[type = "text"],.C input[type = "number"],.C input[type="email"],.C input[type = "address"],.C input[type = "time"]{
+border:0;
+background:#D5A986;
+margin:10px 40px;
+display:rgb(17, 16, 16);
+padding:14px 10px;
+border:2px solid #000000;
+border-radius:10px;
+outline:none;
+color:rgb(2, 2, 2);
+} 
+.C input[type ="submit"]{     
+border:0;
+background:#258DB9;
+margin:10px 40px;
+text-align:center;
+padding:10px 30px;
+border:2px solid #696b6d;
+border-radius:10px;
+outline:none;
+color:rgb(255, 255, 255);
+ }
+ .C input[type ="submit"]:hover{
+ background:#37D1A7;
+ 
+ }
+ .C input[type = "text"]:focus,.C input[type = "number"]:focus,.C input[type="email"]:focus,.C input[type = "address"]:focus,.C input[type = "time"]:focus{
+ width:230px;
+ border-color:white;
+}
+    </style>
+</head>
+<body>
+    <form class="C">
+        <br><br>
+        <label>Association Name:</label><input type="text" name="Author" id="Author">
+    
+        <br><br>
+       <label>Phone No:</label><input type="number" name="Author" id="Author">
+        <br><br>
+        <label>Address:</label>  <input type="address" name="Author" id="Author">
+        <br><br>
+        <label>Email:</label> <input type="email" name="" id="Author">
+        <br><br>
+        <input type="submit" value="sunmit">
+    </form>
+</body>
+</html>

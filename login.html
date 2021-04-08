@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Bank</title>
+    <style>
+        .T{
+            width:300px;
+            padding:40px;
+            position:absolute;
+            top:25%;
+            left:70%;
+            background:none;
+            text-align:center;
+            border-radius:24px;
+        }
+        .T input[type = "text"],.T input[type = "password"]{
+border:0;
+background:none;
+margin:10px 40px;
+display:rgb(17, 16, 16);
+text-align:center;
+padding:14px 10px;
+border:2px solid #81878b;
+border-radius:24px;
+outline:none;
+color:white;
+}
+        body{
+         background-image: url("pic5.jpg");
+         background-repeat: no-repeat;
+         background-size: 100%;
+        
+        }
+ .T input[type ="button"]{     
+border:0;
+background:#646464;
+margin:10px 40px;
+text-align:center;
+padding:10px 30px;
+border:2px solid #696b6d;
+border-radius:10px;
+outline:none;
+color:rgb(255, 255, 255);
+ }
+ .T input[type ="button"]:hover{
+ background:#18b4cf;
+ 
+ }
+ .T input[type = "text"]:focus,.T input[type = "password"]:focus{
+ width:230px;
+ border-color:#d8f7f0;
+} 
+.S{
+        
+            position:absolute;
+            top:2%;
+            left:90%;
+            background:none;
+            text-align:center;
+            border-radius:34px;
+
+}
+.S input[type ="button"]{     
+border:20%;
+background:#646464;
+margin:10px 40px;
+text-align:center;
+padding:10px 20px;
+border:0;
+border-radius:24px;
+outline:none;
+color:#fdfdfd;
+ }
+ .S input[type ="button"]:hover{
+ background:#18b4cf;
+ 
+ }
+ .E{
+    background:none;
+ }
+ .L{
+
+    width:500px;
+            padding:40px;
+            position:absolute;
+            top:20%;
+            left:15%;
+            background:none;
+            text-align:center;
+            color:white;
+ }
+ .H{
+            width:600px;
+            padding:40px;
+            position:absolute;
+            top:0%;
+            left:62%;
+            background:none;
+            text-align:center;
+           
+        }
+        .H button{     
+border:0;
+background:#696b6d;
+margin:10px 40px;
+text-align:center;
+padding:10px 30px;
+border:2px solid #696b6d;
+border-radius:10px;
+outline:none;
+color:rgb(255, 255, 255);
+ }
+    </style>
+
+</head>
+<body>
+    <form class="T">
+        <h1>Login</h1>
+        <input type="text"placeholder="Email/phone">
+        <br>
+        <br>
+        <input type="password"  placeholder="password">
+        <br>
+        <br>
+        <input type="button" value="Login">
+        <br>
+
+        </form>
+      
+        <span class="L"><h1>Welcome To Food bank Bd</h1>
+            Food Bank bd is a non-profit and totally volunteer run organization. 
+            We are located at Dhaka,Bangladesh. The bank is here to serve all residents of 
+            Dhaka in both temporary and long-term need.We want to help those people who 
+            can not buy their daily food.</span>
+            <div class="H">
+                <button onclick="window.location.href='login.html';">Home</button>
+                <button onclick="window.location.href='donation.html';">Donar</button>
+                <button onclick="window.location.href='donation.html';">Recipient</button> 
+                </div>
+</body>
+</html>

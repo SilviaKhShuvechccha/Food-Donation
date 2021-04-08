@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>imformation </title>
+    <style>
+        body{
+            background-image: url("pic9.jpg");
+            background-repeat: no-repeat;
+            background-size:800px;
+            background-color: #EBEAE5;
+        }
+        .C{
+            
+            width:500px;
+            padding:40px;
+            position:absolute;
+            top:0%;
+            left:62%;
+            background:white;
+            text-align:start;
+        }
+        .C input[type = "number"],.C textarea,.C input[type = "address"],.C input[type = "time"]{
+border:0;
+background:none;
+margin:10px 40px;
+display:rgb(17, 16, 16);
+text-align:center;
+padding:14px 10px;
+border:2px solid #81878b;
+border-radius:10px;
+outline:none;
+color:rgb(0, 0, 0);
+}
+
+
+.E{
+            
+            width:500px;
+            padding:40px;
+            position:absolute;
+            top:60%;
+            left:62%;
+            background:white;
+            text-align:start;
+        }
+        .E input[type="text"],.E textarea {
+border:0;
+background:none;
+margin:10px 40px;
+display:rgb(17, 16, 16);
+text-align:center;
+padding:14px 10px;
+border:2px solid  #81878b;
+border-radius:10px;
+outline:none;
+color:rgb(14, 13, 13);
+}
+.P{
+            width:400px;
+            padding:40px;
+            position:absolute;
+            top:1%;
+            left:5%;
+            background:none;
+            text-align:center;
+            color: rgb(3, 3, 3);
+            text-size-adjust:;
+}
+.D{
+            top:0%;
+            Right:100%;
+            width:400px;
+}
+    </style>
+</head>
+<body>
+    <form class="C">
+        <h1>Information</h1>
+        <label>Phone No:</label><input type="number" name="food info" id="food info">
+        <br><br>
+       <label>Food Info:</label> <textarea cols="30" raws="10"></textarea> 
+        <br><br>
+        <label>Pick up address:</label> <input type="address" name="food info" id="food info" value="address">
+        <br><br>
+        <label>Pick up Time:</label> <input type="time" name="food info" id="food info" value="address">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+<form class="E">
+    <h1>Food</h1>
+    <label>Food type:</label><input type="text" name="food" id="food">
+    <br><br>
+   <label>Food Details:</label> <textarea cols="30" raws="10"></textarea> 
+    <br><br>
+    <input type="submit" value="Submit">
+    </form>
+    <h2 class="P">
+        By fillup this form you can donate foods for poor people.We can callet from you and donate poor people.
+        Thank you
+    </h2>
+    <div class="D"> <button onclick="window.location.href='author.html';">NEXT</button></div>
+</body>
+</html>
